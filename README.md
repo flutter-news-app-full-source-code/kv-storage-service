@@ -1,6 +1,11 @@
 # Key-Value Storage Service Interface
 
-A Dart package defining an abstract interface (`HtKVStorageService`) for key-value storage. This promotes consistency and allows for interchangeable storage implementations (like SharedPreferences, Hive, secure storage, etc.).
+![coverage: xx](https://img.shields.io/badge/coverage-94-green)
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![License: PolyForm Free Trial](https://img.shields.io/badge/License-PolyForm%20Free%20Trial-blue)](https://polyformproject.org/licenses/free-trial/1.0.0)
+
+
+A Dart package defining an abstract interface (`KVStorageService`) for key-value storage. This promotes consistency and allows for interchangeable storage implementations (like SharedPreferences, Hive, secure storage, etc.).
 
 ## Features ✨
 
@@ -21,21 +26,21 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  ht_kv_storage_service:
+  kv_storage_service:
     git:
-      url: https://github.com/headlines-toolkit/ht-kv-storage-service.git
+      url: https://github.com/flutter-news-app-full-source-codet/kv-storage-service.git
       ref: main
 ```
 
 ### Usage
 
-1.  **Implement the Interface:** Create a concrete class that implements `HtKVStorageService` using your desired storage mechanism (e.g., `shared_preferences`).
+1.  **Implement the Interface:** Create a concrete class that implements `KVStorageService` using your desired storage mechanism (e.g., `shared_preferences`).
 
     ```dart
-    import 'package:ht_kv_storage_service/ht_kv_storage_service.dart';
+    import 'package:kv_storage_service/kv_storage_service.dart';
     import 'package:shared_preferences/shared_preferences.dart';
 
-    class HtKVStorageSharedPreferences implements HtKVStorageService {
+    class HtKVStorageSharedPreferences implements KVStorageService {
       HtKVStorageSharedPreferences(this._prefs);
 
       final SharedPreferences _prefs;
@@ -64,14 +69,14 @@ dependencies:
     }
     ```
 
-2.  **Use the Service:** Inject or provide an instance of your concrete implementation and use the `HtKVStorageService` interface methods.
+2.  **Use the Service:** Inject or provide an instance of your concrete implementation and use the `KVStorageService` interface methods.
 
     ```dart
-    import 'package:ht_kv_storage_service/ht_kv_storage_service.dart';
+    import 'package:kv_storage_service/kv_storage_service.dart';
     // import 'package:your_package/your_storage_implementation.dart';
 
     Future<void> main() async {
-      // Obtain an instance of your HtKVStorageService implementation
+      // Obtain an instance of your KVStorageService implementation
       // (e.g., using dependency injection or direct instantiation)
       // final prefs = await SharedPreferences.getInstance();
       // final storageService = HtKVStorageSharedPreferences(prefs);
@@ -102,7 +107,7 @@ dependencies:
 
 ## Error Handling
 
-The `HtKVStorageService` methods may throw specific exceptions derived from `StorageException` upon failure:
+The `KVStorageService` methods may throw specific exceptions derived from `StorageException` upon failure:
 
 *   `StorageWriteException`: Thrown by `write*` methods on failure.
 *   `StorageReadException`: Thrown by `read*` methods on general read failure.
@@ -112,3 +117,9 @@ The `HtKVStorageService` methods may throw specific exceptions derived from `Sto
 *   `StorageTypeMismatchException`: Thrown by `read*` methods if the stored data type doesn't match the expected type.
 
 Implementations should handle these exceptions appropriately (e.g., using `try-catch` blocks).
+
+## 🔑 Licensing
+
+This package is source-available and licensed under the [PolyForm Free Trial 1.0.0](LICENSE). Please review the terms before use.
+
+For commercial licensing options that grant the right to build and distribute unlimited applications, please visit the main [**Flutter News App - Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code) organization.

@@ -1,8 +1,8 @@
-import 'package:ht_kv_storage_service/src/ht_kv_storage_service.dart';
+import 'package:kv_storage_service/src/kv_storage_service.dart';
 
 /// {@template storage_key}
 /// Defines enum members representing keys used for accessing values
-/// stored within the [HtKVStorageService].
+/// stored within the [KVStorageService].
 ///
 /// This enum prevents the use of magic strings for keys, promoting
 /// type safety and reducing potential runtime errors. Use the [stringValue]

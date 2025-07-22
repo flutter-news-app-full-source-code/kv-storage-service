@@ -1,9 +1,9 @@
-import 'package:ht_kv_storage_service/ht_kv_storage_service.dart';
+import 'package:kv_storage_service/kv_storage_service.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 // Create a mock implementation of the abstract class
-class MockHtKVStorageService extends Mock implements HtKVStorageService {}
+class MockKVStorageService extends Mock implements KVStorageService {}
 
 // Define sample exceptions for testing purposes
 const testWriteException = StorageWriteException('testKey', 'testValue');
@@ -18,11 +18,11 @@ const testTypeMismatchException = StorageTypeMismatchException(
 const testKeyNotFoundException = StorageKeyNotFoundException('testKey');
 
 void main() {
-  group('HtKVStorageService Abstract Class', () {
-    late MockHtKVStorageService mockStorageService;
+  group('KVStorageService Abstract Class', () {
+    late MockKVStorageService mockStorageService;
 
     setUp(() {
-      mockStorageService = MockHtKVStorageService();
+      mockStorageService = MockKVStorageService();
 
       // Register fallback values for methods returning non-nullable types
       // or futures of non-nullable types, if needed by specific tests.

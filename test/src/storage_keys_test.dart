@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:ht_kv_storage_service/ht_kv_storage_service.dart';
+import 'package:kv_storage_service/kv_storage_service.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -182,7 +182,7 @@ class StorageTypeMismatchException extends StorageException {
 /// secure storage). It allows for storing and retrieving basic data types
 /// associated with string keys.
 /// {@endtemplate}
-abstract class HtKVStorageService {
+abstract class KVStorageService {
   /// Writes a string value associated with the given [key].
   ///
   /// Throws a [StorageWriteException] if the write operation fails.

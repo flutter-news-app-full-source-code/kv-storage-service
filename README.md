@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://avatars.githubusercontent.com/u/202675624?s=400&u=dc72a2b53e8158956a3b672f8e52e39394b6b610&v=4" alt="Flutter News App Toolkit Logo" width="220">
   <h1>Key-Value Storage Service</h1>
-  <p><strong>The core data models and utilities for the Flutter News App Toolkit.</strong></p>
+  <p><strong>An abstract interface for key-value storage within the Flutter News App Full Source Code Toolkit.</strong></p>
 </div>
 
 <p align="center">

@@ -1,125 +1,41 @@
-# Key-Value Storage Service Interface
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/202675624?s=400&u=dc72a2b53e8158956a3b672f8e52e39394b6b610&v=4" alt="Flutter News App Toolkit Logo" width="220">
+  <h1>Key-Value Storage Service</h1>
+  <p><strong>The core data models and utilities for the Flutter News App Toolkit.</strong></p>
+</div>
 
-![coverage: xx](https://img.shields.io/badge/coverage-94-green)
-[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
-[![License: PolyForm Free Trial](https://img.shields.io/badge/License-PolyForm%20Free%20Trial-blue)](https://polyformproject.org/licenses/free-trial/1.0.0)
+<p align="center">
+  <img src="https://img.shields.io/badge/coverage-100%25-green?style=for-the-badge" alt="coverage: 100%">
+  <a href="https://flutter-news-app-full-source-code.github.io/docs/"><img src="https://img.shields.io/badge/LIVE_DOCS-VIEW-slategray?style=for-the-badge" alt="Live Docs: View"></a>
+  <a href="https://github.com/flutter-news-app-full-source-code"><img src="https://img.shields.io/badge/MAIN_PROJECT-BROWSE-purple?style=for-the-badge" alt="Main Project: Browse"></a>
+</p>
 
+This `kv_storage_service` package defines an abstract interface (`KVStorageService`) for key-value storage within the [**Flutter News App Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code). This promotes consistency and allows for interchangeable storage implementations (like SharedPreferences, Hive, secure storage, etc.), ensuring that application logic remains decoupled from the underlying storage mechanism. It provides a standardized way to interact with local data, crucial for managing user preferences, authentication tokens, and other application settings.
 
-A Dart package defining an abstract interface (`KVStorageService`) for key-value storage. This promotes consistency and allows for interchangeable storage implementations (like SharedPreferences, Hive, secure storage, etc.).
+## ⭐ Feature Showcase: Flexible & Robust Local Storage
 
-## Features ✨
+This package offers a comprehensive set of features for managing local key-value data.
 
-*   Defines a clear contract for basic key-value operations (read, write, delete) for common data types (`String`, `bool`, `int`, `double`).
-*   Includes a `clearAll` method for removing all entries.
-*   Provides a `StorageKey` enum to avoid magic strings, promoting type safety. Use the `stringValue` getter for the actual key string.
-*   Defines a set of custom `StorageException` subclasses (`StorageWriteException`, `StorageReadException`, `StorageDeleteException`, `StorageClearException`, `StorageKeyNotFoundException`, `StorageTypeMismatchException`) to handle specific storage errors.
+<details>
+<summary><strong>🧱 Core Functionality</strong></summary>
 
-## Getting Started 🚀
+### 🚀 Abstract `KVStorageService` Interface
+- **`KVStorageService`:** Defines a clear contract for basic key-value operations (read, write, delete) for common data types (`String`, `bool`, `int`, `double`).
+- **`clearAll` Method:** Provides a method for efficiently removing all entries from the storage.
 
-### Prerequisites
+### 🔐 Type-Safe Key Management
+- **`StorageKey` Enum:** Includes a `StorageKey` enum to avoid magic strings, promoting type safety and reducing errors. Use the `stringValue` getter for the actual key string.
 
-*   Dart SDK installed.
+### 🛡️ Standardized Error Handling
+- **Custom `StorageException` Hierarchy:** Defines a comprehensive set of custom `StorageException` subclasses (`StorageWriteException`, `StorageReadException`, `StorageDeleteException`, `StorageClearException`, `StorageKeyNotFoundException`, `StorageTypeMismatchException`) to handle specific storage errors. This ensures predictable and consistent error management across the application layers.
 
-### Installation
+### 💉 Implementation Agnostic
+- **Interchangeable Implementations:** Designed to be implemented by various storage mechanisms (e.g., `shared_preferences`, `hive`, `flutter_secure_storage`), allowing developers to swap storage solutions without altering application logic.
 
-Add the package to your `pubspec.yaml`:
+> **💡 Your Advantage:** You get a meticulously designed, production-quality key-value storage interface that simplifies local data management, ensures type safety, provides robust error handling, and allows for flexible storage implementations. This package accelerates development by providing a solid foundation for local data persistence.
 
-```yaml
-dependencies:
-  kv_storage_service:
-    git:
-      url: https://github.com/flutter-news-app-full-source-codet/kv-storage-service.git
-      ref: main
-```
-
-### Usage
-
-1.  **Implement the Interface:** Create a concrete class that implements `KVStorageService` using your desired storage mechanism (e.g., `shared_preferences`).
-
-    ```dart
-    import 'package:kv_storage_service/kv_storage_service.dart';
-    import 'package:shared_preferences/shared_preferences.dart';
-
-    class HtKVStorageSharedPreferences implements KVStorageService {
-      HtKVStorageSharedPreferences(this._prefs);
-
-      final SharedPreferences _prefs;
-
-      @override
-      Future<void> writeString({required String key, required String value}) async {
-        await _prefs.setString(key, value);
-      }
-
-      @override
-      Future<String?> readString({required String key}) async {
-        return _prefs.getString(key);
-      }
-
-      // ... implement other methods (writeBool, readBool, etc.) ...
-
-      @override
-      Future<void> delete({required String key}) async {
-        await _prefs.remove(key);
-      }
-
-      @override
-      Future<void> clearAll() async {
-        await _prefs.clear();
-      }
-    }
-    ```
-
-2.  **Use the Service:** Inject or provide an instance of your concrete implementation and use the `KVStorageService` interface methods.
-
-    ```dart
-    import 'package:kv_storage_service/kv_storage_service.dart';
-    // import 'package:your_package/your_storage_implementation.dart';
-
-    Future<void> main() async {
-      // Obtain an instance of your KVStorageService implementation
-      // (e.g., using dependency injection or direct instantiation)
-      // final prefs = await SharedPreferences.getInstance();
-      // final storageService = HtKVStorageSharedPreferences(prefs);
-
-      // Example usage:
-      try {
-        // Use the stringValue getter for the key
-        await storageService.writeBool(
-          key: StorageKey.hasSeenOnboarding.stringValue,
-          value: true,
-        );
-        final hasSeenOnboarding = await storageService.readBool(
-          key: StorageKey.hasSeenOnboarding.stringValue,
-        );
-        print('Has seen onboarding: $hasSeenOnboarding');
-      } on StorageWriteException catch (e) {
-        print('Failed to write: ${e.message}, Key: ${e.key}');
-      } on StorageReadException catch (e) {
-        print('Failed to read: ${e.message}, Key: ${e.key}');
-      } on StorageTypeMismatchException catch (e) {
-        print('Type mismatch: ${e.message}, Key: ${e.key}, Expected: ${e.expectedType}, Found: ${e.actualType}');
-      } catch (e) {
-        // Handle other potential exceptions
-        print('An unexpected error occurred: $e');
-      }
-    }
-    ```
-
-## Error Handling
-
-The `KVStorageService` methods may throw specific exceptions derived from `StorageException` upon failure:
-
-*   `StorageWriteException`: Thrown by `write*` methods on failure.
-*   `StorageReadException`: Thrown by `read*` methods on general read failure.
-*   `StorageDeleteException`: Thrown by `delete` on failure.
-*   `StorageClearException`: Thrown by `clearAll` on failure.
-*   `StorageKeyNotFoundException`: May be thrown by `delete` if the key doesn't exist (implementation-dependent). `read*` methods typically return `null` or a default value instead.
-*   `StorageTypeMismatchException`: Thrown by `read*` methods if the stored data type doesn't match the expected type.
-
-Implementations should handle these exceptions appropriately (e.g., using `try-catch` blocks).
+</details>
 
 ## 🔑 Licensing
 
-This package is source-available and licensed under the [PolyForm Free Trial 1.0.0](LICENSE). Please review the terms before use.
-
-For commercial licensing options that grant the right to build and distribute unlimited applications, please visit the main [**Flutter News App - Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code) organization.
+This `kv_storage_service` package is an integral part of the [**Flutter News App Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code). For comprehensive details regarding licensing, including trial and commercial options for the entire toolkit, please refer to the main toolkit organization page.

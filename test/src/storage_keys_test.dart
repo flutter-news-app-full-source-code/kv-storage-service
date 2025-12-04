@@ -12,6 +12,15 @@ void main() {
         StorageKey.hasSeenOnboarding.stringValue,
         equals('has_seen_onboarding'),
       );
+      expect(
+        StorageKey.positiveInteractionCount.stringValue,
+        equals('positive_interaction_count'),
+      );
+      expect(StorageKey.fcmToken.stringValue, equals('fcm_token'));
+      expect(
+        StorageKey.oneSignalPlayerId.stringValue,
+        equals('one_signal_player_id'),
+      );
     });
 
     // Test that all enum values are covered in the stringValue getter's switch statement.

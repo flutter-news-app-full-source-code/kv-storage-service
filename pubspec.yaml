@@ -2,7 +2,7 @@ name: kv_storage_service
 description: Defines an abstract interface for key-value storage services in Dart.
 repository: https://github.com/flutter-news-app-full-source-code/kv-storage-service
 publish_to: none
-version: 1.0.1
+version: 1.1.0
 
 environment:
   sdk: ^3.9.0

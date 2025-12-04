@@ -1,7 +1,3 @@
-## 1.2.0 - 2025-12-04
-
-- **feat**: add `oneSignalPlayerId` key to persist the OneSignal device ID.
-
 ## 1.1.0 - 2025-12-04
 
 - **feat**: add `positiveInteractionCountKey` to track user engagement for in-app reviews.

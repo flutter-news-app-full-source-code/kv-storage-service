@@ -15,7 +15,17 @@ enum StorageKey {
 
   /// Key for storing a boolean flag indicating whether the user has completed
   /// the onboarding flow.
-  hasSeenOnboarding;
+  hasSeenOnboarding,
+
+  /// Key for storing an integer that counts positive user interactions,
+  /// used to determine when to show an in-app review dialog.
+  positiveInteractionCount,
+
+  /// Key for storing the Firebase Cloud Messaging (FCM) token for push notifications.
+  fcmToken,
+
+  /// Key for storing the OneSignal Player ID for push notifications.
+  oneSignalPlayerId;
 
   /// Returns the snake_case string representation of the key for storage.
   String get stringValue {
@@ -24,6 +34,12 @@ enum StorageKey {
         return 'auth_token';
       case StorageKey.hasSeenOnboarding:
         return 'has_seen_onboarding';
+      case StorageKey.positiveInteractionCount:
+        return 'positive_interaction_count';
+      case StorageKey.fcmToken:
+        return 'fcm_token';
+      case StorageKey.oneSignalPlayerId:
+        return 'one_signal_player_id';
     }
   }
 }
